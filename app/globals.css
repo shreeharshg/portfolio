@@ -1,0 +1,205 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ✅ Light Mode (Updated to Softer Gray Gradient) */
+:root {
+  --primary-gradient: linear-gradient(45deg, #3b82f6, #8b5cf6);
+  --glass-background: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+html, body {
+  min-height: 100vh;
+  width: 100%;
+  overscroll-behavior: none;
+}
+
+/* ✅ Dark Mode */
+.dark {
+  background: radial-gradient(circle at center, #1a237e, #000000);
+  color: white;
+}
+
+.dark .glass-morphism {
+  background: rgba(50, 50, 50, 0.6);
+  backdrop-filter: blur(10px);
+}
+
+/* ✅ Light Mode - Soft Gray Gradient */
+.light {
+  background: radial-gradient(circle at center, #f7f7fa, #b7b7b8); /* Softer gray */
+  color: #1E40AF;
+}
+/* ✅ Faint Navbar for Dark Mode */
+/* ✅ Dark Mode Navbar */
+.dark nav {
+  background: rgba(15, 15, 15, 0.1); /* Faint Black Tint */
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Ultra-soft border */
+  box-shadow: none; /* Remove any shadow */
+}
+
+/* ✅ Light Mode Navbar */
+.light nav {
+  background: rgba(240, 240, 240, 0.05); /* Ultra-soft light gray */
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.02);
+  box-shadow: none;
+}
+
+/* ✅ Navbar Links */
+.dark nav a {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.light nav a {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+/* ✅ Navbar Hover Effects */
+.dark nav a:hover {
+  color: white;
+}
+
+.light nav a:hover {
+  color: black;
+}
+
+/* ✅ Fix Background Gradient Applying to Navbar */
+.dark nav, .light nav {
+  background-image: none !important; /* Prevent any gradient from applying */
+}
+
+
+/* ✅ Glassmorphism (Updated for Softer Light Mode) */
+.light .glass-morphism {
+  background: rgba(240, 240, 240, 0.6); /* Softer gray tint */
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(200, 200, 200, 0.5);
+}
+
+/* ✅ Gradient Text */
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, #3b82f6, #8b5cf6);
+}
+
+/* ✅ Custom Scrollbar */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #4f46e5 transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #4f46e5;
+  border-radius: 20px;
+}
+
+/* ✅ Dark Mode Scrollbar */
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #8b5cf6;
+}
+
+/* ✅ Parallax Container */
+.parallax-container {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* ✅ Skill Bar */
+.skill-bar-fill {
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  transition: width 1s ease-out;
+}
+
+/* ✅ Cursor Effects */
+.cursor-dot {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  transition: transform 0.15s ease-out;
+}
+
+.cursor-outline {
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  border: 1px solid white;
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  transition: transform 0.3s ease-out;
+}
+
+/* ✅ Make Progress Bar More Visible */
+
+/* Dark Mode */
+.dark .progress-bar {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 1)); /* Brighter */
+  height: 4px !important; /* Slightly thicker */
+  opacity: 1 !important;
+  display: block !important;
+  z-index: 9999 !important;
+}
+
+/* Light Mode */
+.light .progress-bar {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)); /* Stronger contrast */
+  height: 4px !important;
+  opacity: 1 !important;
+  display: block !important;
+  z-index: 9999 !important;
+}
+
+/* Ensure it stays at the top */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: background 0.3s ease-in-out;
+  transform-origin: left !important;
+}
+
+/* ✅ Water Ripple Effect (Light Mode) */
+.ripple-effect {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(180, 220, 255, 0.5) 10%, transparent 80%);
+  animation: ripple-animation 4s infinite ease-in-out;
+  opacity: 0.6;
+}
+
+@keyframes ripple-animation {
+  0% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.1); opacity: 0.4; }
+  100% { transform: scale(1); opacity: 0.6; }
+}
+
+/* ✅ Subtle Galaxy Effect (Dark Mode) */
+.galaxy-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(60, 60, 100, 0.2), transparent 70%);
+  opacity: 0.4;
+  filter: blur(40px);
+}
