@@ -21,7 +21,15 @@ const generateRhombuses = () => {
 };
 
 export default function ParallaxBackground() {
-  const [rhombuses, setRhombuses] = useState([]);
+  const [rhombuses, setRhombuses] = useState<Array<{
+    id: string;
+    size: number;
+    x: number;
+    y: number;
+    speed: number;
+    opacity: number;
+    index: number;
+  }>>([]);
 
   useEffect(() => {
     setRhombuses(generateRhombuses());
