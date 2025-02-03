@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
+import { motion, useScroll, useSpring, } from 'framer-motion'
 import { useTheme } from '@/context/ThemeProvider'
 
 export default function ScrollProgress() {

@@ -1,19 +1,18 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useState } from "react";
+
 
 interface RhombusProps {
   x: number;
   y: number;
   size: number;
-  speed: number;
   opacity: number;
   index: number;
   totalRhombuses: number;
 }
 
-const Rhombus = ({ x, y, size, speed, opacity, index, totalRhombuses }: RhombusProps) => {
+const Rhombus = ({ x, y, size, opacity, index, totalRhombuses }: RhombusProps) => {
   const { scrollYProgress } = useScroll(); // ✅ Track full scroll range
 
   // ✅ Ensure scrolling motion continues throughout the full page scroll

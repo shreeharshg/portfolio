@@ -28,7 +28,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="gradient-text">Creative</span> Developer
+          <span className="gradient-text">Shreeharsh</span> Gudibandi
         </motion.h1>
 
         <motion.p
