@@ -7,6 +7,7 @@ import ScrollProgress from "@/components/layout/ScrollProgess";
 import { ThemeProvider } from "@/context/ThemeProvider"; // Import ThemeProvider
 import "./globals.css";
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

@@ -15,7 +15,9 @@ export default function Hero() {
       id="home" 
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      style={{ background: "none" }} // ✅ Removes any background
     >
+      {/* ✅ Hero Content */}
       <motion.div 
         className="relative z-10 text-center"
         style={{ y, opacity }}
@@ -52,6 +54,7 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
+      {/* ✅ Mouse Scroll Indicator */}
       <motion.div
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
         animate={{

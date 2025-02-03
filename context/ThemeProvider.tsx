@@ -1,27 +1,22 @@
-"use client"; // ✅ Required for React hooks in Next.js
+"use client";
 
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-// ✅ Keep your existing structure but define an explicit type
-interface ThemeContextType {
-  theme: string;
-  toggleTheme: () => void;
-}
-
-// ✅ Fix: Ensure createContext has an explicit type
-export const ThemeContext = createContext<ThemeContextType>({
+// Creating Theme Context
+const ThemeContext = createContext({
   theme: "dark",
   toggleTheme: () => {},
 });
 
-// ✅ Keep your existing logic
-export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<string>("dark");
+export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+  const [theme, setTheme] = useState("dark");
 
+  // Load stored theme from localStorage
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme") || "dark";
     setTheme(storedTheme);
-    document.documentElement.classList.add(storedTheme); // ✅ Keep this as it is
+    document.documentElement.classList.add(storedTheme);
   }, []);
 
   const toggleTheme = () => {
@@ -29,23 +24,33 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
 
-    // ✅ Keep existing class switching logic
+    // Ensure old theme is removed and new one applied
     document.documentElement.classList.remove("dark", "light");
     document.documentElement.classList.add(newTheme);
   };
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <div className={theme}>{children}</div> {/* ✅ Keep this structure */}
+      <AnimatePresence mode="wait">
+        {/* ✅ Smooth Transition for Theme Change */}
+        <motion.div
+          key={theme}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }} // ✅ Smooth Theme Change
+          className="absolute inset-0"
+          style={{
+            zIndex: -1, // ✅ Keeps it behind content
+          }}
+        />
+
+        {/* ✅ Keep Theme Class Applied to Entire Page */}
+        <div className={theme}>{children}</div>
+      </AnimatePresence>
     </ThemeContext.Provider>
   );
 };
 
-// ✅ Keep `useTheme` logic but add error handling for safety
-export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error("useTheme must be used within a ThemeProvider");
-  }
-  return context;
-};
+// Custom Hook for easier usage
+export const useTheme = () => useContext(ThemeContext);

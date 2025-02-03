@@ -2,23 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ✅ Light Mode (Updated to Softer Gray Gradient) */
+/* ✅ Light Mode - Soft Gray Gradient */
 :root {
   --primary-gradient: linear-gradient(45deg, #3b82f6, #8b5cf6);
   --glass-background: rgba(255, 255, 255, 0.1);
   --glass-border: rgba(255, 255, 255, 0.2);
 }
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ✅ Ensure Global Background is Applied Everywhere */
 html, body {
   min-height: 100vh;
   width: 100%;
   overscroll-behavior: none;
+  background: transparent !important;
+}
+
+/* ✅ One Background for Both Light & Dark Mode */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -50; /* ✅ Ensures nothing covers it */
+  background: radial-gradient(circle at center, #1a237e, #000000);
+}
+
+.light body::before {
+  background: radial-gradient(circle at center, #f7f7fa, #b7b7b8);
+}
+
+/* ✅ Consistent Background for Both Light & Dark Mode */
+.bg-dark {
+  background: radial-gradient(circle at center, #1a237e, #000000) !important;
+}
+
+.bg-light {
+  background: radial-gradient(circle at center, #f7f7fa, #b7b7b8) !important;
+}
+
+/* ✅ Ensure Hero Section is Transparent */
+#home {
+  background: transparent !important;
 }
 
 /* ✅ Dark Mode */
 .dark {
-  background: radial-gradient(circle at center, #1a237e, #000000);
   color: white;
+  background: transparent !important;
 }
 
 .dark .glass-morphism {
@@ -26,23 +62,28 @@ html, body {
   backdrop-filter: blur(10px);
 }
 
-/* ✅ Light Mode - Soft Gray Gradient */
+/* ✅ Light Mode */
 .light {
-  background: radial-gradient(circle at center, #f7f7fa, #b7b7b8); /* Softer gray */
   color: #1E40AF;
-}
-/* ✅ Faint Navbar for Dark Mode */
-/* ✅ Dark Mode Navbar */
-.dark nav {
-  background: rgba(15, 15, 15, 0.1); /* Faint Black Tint */
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Ultra-soft border */
-  box-shadow: none; /* Remove any shadow */
+  background: transparent !important;
 }
 
-/* ✅ Light Mode Navbar */
+.light .glass-morphism {
+  background: rgba(240, 240, 240, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(200, 200, 200, 0.5);
+}
+
+/* ✅ Navbar Styling */
+.dark nav {
+  background: rgba(15, 15, 15, 0.1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: none;
+}
+
 .light nav {
-  background: rgba(240, 240, 240, 0.05); /* Ultra-soft light gray */
+  background: rgba(240, 240, 240, 0.05);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.02);
   box-shadow: none;
@@ -66,17 +107,9 @@ html, body {
   color: black;
 }
 
-/* ✅ Fix Background Gradient Applying to Navbar */
+/* ✅ Remove Background Image from Navbar */
 .dark nav, .light nav {
-  background-image: none !important; /* Prevent any gradient from applying */
-}
-
-
-/* ✅ Glassmorphism (Updated for Softer Light Mode) */
-.light .glass-morphism {
-  background: rgba(240, 240, 240, 0.6); /* Softer gray tint */
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(200, 200, 200, 0.5);
+  background-image: none !important;
 }
 
 /* ✅ Gradient Text */
@@ -111,20 +144,6 @@ html, body {
   background-color: #8b5cf6;
 }
 
-/* ✅ Parallax Container */
-.parallax-container {
-  perspective: 1000px;
-  transform-style: preserve-3d;
-}
-
-/* ✅ Skill Bar */
-.skill-bar-fill {
-  height: 0.5rem;
-  border-radius: 9999px;
-  background: linear-gradient(to right, #3b82f6, #8b5cf6);
-  transition: width 1s ease-out;
-}
-
 /* ✅ Cursor Effects */
 .cursor-dot {
   position: fixed;
@@ -148,27 +167,7 @@ html, body {
   transition: transform 0.3s ease-out;
 }
 
-/* ✅ Make Progress Bar More Visible */
-
-/* Dark Mode */
-.dark .progress-bar {
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 1)); /* Brighter */
-  height: 4px !important; /* Slightly thicker */
-  opacity: 1 !important;
-  display: block !important;
-  z-index: 9999 !important;
-}
-
-/* Light Mode */
-.light .progress-bar {
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)); /* Stronger contrast */
-  height: 4px !important;
-  opacity: 1 !important;
-  display: block !important;
-  z-index: 9999 !important;
-}
-
-/* Ensure it stays at the top */
+/* ✅ Animated Progress Bar */
 .progress-bar {
   position: fixed;
   top: 0;
@@ -176,30 +175,87 @@ html, body {
   right: 0;
   transition: background 0.3s ease-in-out;
   transform-origin: left !important;
+  height: 4px !important;
+  opacity: 1 !important;
+  display: block !important;
+  z-index: 9999 !important;
 }
 
-/* ✅ Water Ripple Effect (Light Mode) */
-.ripple-effect {
+.dark .progress-bar {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 1));
+}
+
+.light .progress-bar {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+}
+
+/* ✅ Shape Styling */
+.shape {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(180, 220, 255, 0.5) 10%, transparent 80%);
-  animation: ripple-animation 4s infinite ease-in-out;
-  opacity: 0.6;
+  opacity: 0.7;
+  animation: float 6s ease-in-out infinite alternate;
 }
 
-@keyframes ripple-animation {
-  0% { transform: scale(1); opacity: 0.6; }
-  50% { transform: scale(1.1); opacity: 0.4; }
-  100% { transform: scale(1); opacity: 0.6; }
+/* ✅ Dark Mode Shapes */
+.dark .circle {
+  background-color: rgba(255, 0, 0, 0.8);
+  border-radius: 50%;
 }
 
-/* ✅ Subtle Galaxy Effect (Dark Mode) */
-.galaxy-bg {
+.dark .square {
+  background-color: rgba(0, 255, 255, 0.8);
+}
+
+.dark .triangle {
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 60px solid rgba(255, 255, 0, 0.8);
+}
+
+.dark .diamond {
+  background-color: rgba(0, 255, 0, 0.8);
+  transform: rotate(45deg);
+}
+
+/* ✅ Light Mode Shapes */
+.light .circle {
+  background-color: rgba(255, 100, 100, 0.9);
+  border-radius: 50%;
+}
+
+.light .square {
+  background-color: rgba(100, 100, 255, 0.9);
+}
+
+.light .triangle {
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 60px solid rgba(255, 255, 100, 1);
+}
+
+.light .diamond {
+  background-color: rgba(100, 255, 100, 1);
+  transform: rotate(45deg);
+}
+
+
+
+.rhombus {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 50% 50%, rgba(60, 60, 100, 0.2), transparent 70%);
-  opacity: 0.4;
-  filter: blur(40px);
+  background-color: rgba(59, 130, 246, 0.6); /* ✅ Blue tint */
+  transform: rotate(45deg) scale(1.2); /* ✅ Ensures perfect rhombus shape *//* ✅ Slight border for visibility */
+}
+
+.rhombus-container {
+  overflow: hidden; /* ✅ Stops them from disappearing */
+}
+
+/* ✅ Dark Mode Rhombuses */
+.dark .rhombus {
+  background-color: rgba(34, 197, 94, 0.5); /* ✅ Green tint in Dark Mode */
+}
+
+/* ✅ Light Mode Rhombuses */
+.light .rhombus {
+  background-color: rgba(59, 130, 246, 0.5); /* ✅ Blue tint in Light Mode */
 }
