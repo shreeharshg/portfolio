@@ -1,20 +1,38 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  })
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<{ success: boolean | null; message: string }>({ success: null, message: "" });
 
+  // Handle Form Submission
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    // Add your form submission logic here
-    console.log('Form submitted:', formData)
-  }
+    e.preventDefault();
+    setStatus({ success: null, message: "Sending..." });
+
+    try {
+      const response = await fetch("/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setStatus({ success: true, message: "Message sent successfully!" });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setStatus({ success: false, message: data.message });
+      }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      setStatus({ success: false, message: "Error sending message." });
+    }
+
+    setTimeout(() => setStatus({ success: null, message: "" }), 3000);
+  };
 
   return (
     <section id="contact" className="py-20">
@@ -36,9 +54,7 @@ export default function Contact() {
           className="glass-morphism p-8 space-y-6"
         >
           <div>
-            <label htmlFor="name" className="block text-gray-200/1000 mb-2">
-              Name
-            </label>
+            <label htmlFor="name" className="block text-gray-200/1000 mb-2">Name</label>
             <input
               type="text"
               id="name"
@@ -50,9 +66,7 @@ export default function Contact() {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-gray-200/1000 mb-2">
-              Email
-            </label>
+            <label htmlFor="email" className="block text-gray-200/1000 mb-2">Email</label>
             <input
               type="email"
               id="email"
@@ -64,9 +78,7 @@ export default function Contact() {
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-gray-200/1000 mb-2">
-              Message
-            </label>
+            <label htmlFor="message" className="block text-gray-200/1000 mb-2">Message</label>
             <textarea
               id="message"
               value={formData.message}
@@ -86,7 +98,13 @@ export default function Contact() {
             Send Message
           </motion.button>
         </motion.form>
+
+        {status.success !== null && (
+          <p className={`mt-4 text-center ${status.success ? "text-green-500" : "text-red-500"}`}>
+            {status.message}
+          </p>
+        )}
       </div>
     </section>
-  )
+  );
 }
