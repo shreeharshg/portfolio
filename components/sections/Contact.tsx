@@ -36,7 +36,7 @@ export default function Contact() {
           className="glass-morphism p-8 space-y-6"
         >
           <div>
-            <label htmlFor="name" className="block text-gray-300 mb-2">
+            <label htmlFor="name" className="block text-gray-200/1000 mb-2">
               Name
             </label>
             <input
@@ -44,13 +44,13 @@ export default function Contact() {
               id="name"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full bg-gray-800/50 rounded-lg p-3 border border-gray-700 focus:border-blue-500 transition-colors"
+              className="w-full bg-gray-400/50 rounded-lg p-3 transition-colors"
               required
             />
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-gray-300 mb-2">
+            <label htmlFor="email" className="block text-gray-200/1000 mb-2">
               Email
             </label>
             <input
@@ -58,13 +58,13 @@ export default function Contact() {
               id="email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full bg-gray-800/50 rounded-lg p-3 border border-gray-700 focus:border-blue-500 transition-colors"
+              className="w-full bg-gray-400/50 rounded-lg p-3 transition-colors"
               required
             />
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-gray-300 mb-2">
+            <label htmlFor="message" className="block text-gray-200/1000 mb-2">
               Message
             </label>
             <textarea
@@ -72,7 +72,7 @@ export default function Contact() {
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               rows={5}
-              className="w-full bg-gray-800/50 rounded-lg p-3 border border-gray-700 focus:border-blue-500 transition-colors"
+              className="w-full bg-gray-400/50 rounded-lg p-3 transition-colors"
               required
             />
           </div>
@@ -81,7 +81,7 @@ export default function Contact() {
             type="submit"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 rounded-lg font-medium"
+            className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 rounded-lg border border-gray-800 font-medium"
           >
             Send Message
           </motion.button>

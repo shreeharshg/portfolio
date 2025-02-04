@@ -13,6 +13,9 @@ module.exports = {
         'text-primary': 'var(--text-primary)',
         'text-secondary': 'var(--text-secondary)',
       },
+      perspective:{
+        1000: '1000px',
+      }
     },
   },
   plugins: [],

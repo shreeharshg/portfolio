@@ -1,83 +1,49 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { useState } from 'react'
-import Image from 'next/image'
+import { motion } from "framer-motion";
+import { useTheme } from "@/context/ThemeProvider";
 
-interface Project {
-  title: string
-  description: string
-  image: string
-  tags: string[]
-  demoLink: string
-  githubLink: string
+interface ProjectProps {
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+  technologies: string[];
 }
 
-export default function ProjectCard({ project, index }: { project: Project; index: number }) {
-  const [isHovered, setIsHovered] = useState(false)
+export default function ProjectCard({ title, description, icon, technologies }: ProjectProps) {
+  const { theme } = useTheme(); // ✅ Get the current theme
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
+      className={`p-6 rounded-lg shadow-md transition hover:scale-105 ${
+        theme === "dark"
+          ? "bg-gray-800/50 text-white" // ✅ Dark Mode
+          : "bg-gray-300/60 text-gray-900" // ✅ Light Mode
+      }`}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.2 }}
-      className="relative group"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4 }}
     >
-      <div className="glass-morphism overflow-hidden rounded-xl">
-        <div className="relative h-48 w-full">
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
-          />
-        </div>
-
-        <div className="p-6">
-          <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-          <p className="text-gray-300 mb-4">{project.description}</p>
-
-          <div className="flex flex-wrap gap-2 mb-4">
-            {project.tags.map((tag, i) => (
-              <span
-                key={i}
-                className="px-3 py-1 text-sm bg-blue-500/20 rounded-full"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          <div className="flex space-x-4">
-            <a
-              href={project.demoLink}
-              className="px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Live Demo
-            </a>
-            <a
-              href={project.githubLink}
-              className="px-4 py-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub
-            </a>
-          </div>
-        </div>
+      {/* ✅ Project Icon */}
+      <div className="flex justify-center items-center text-blue-400 mb-4 text-5xl">
+        {icon}
       </div>
 
-      {isHovered && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-xl pointer-events-none"
-        />
-      )}
+      {/* ✅ Project Title */}
+      <h3 className="text-xl font-bold">{title}</h3>
+
+      {/* ✅ Description */}
+      <p className="mt-2">{description}</p>
+
+      {/* ✅ Technologies Used */}
+      <div className="mt-4 flex flex-wrap gap-2">
+        {technologies.map((tech) => (
+          <span key={tech} className="bg-gray-700 text-sm px-3 py-1 rounded-full text-gray-300 dark:text-gray-300 light:text-gray-700">
+            {tech}
+          </span>
+        ))}
+      </div>
     </motion.div>
-  )
+  );
 }

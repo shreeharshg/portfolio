@@ -9,10 +9,6 @@
   --glass-border: rgba(255, 255, 255, 0.2);
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* ✅ Ensure Global Background is Applied Everywhere */
 html, body {
   min-height: 100vh;
@@ -35,6 +31,7 @@ body::before {
 
 .light body::before {
   background: radial-gradient(circle at center, #f7f7fa, #b7b7b8);
+  color: #434344;
 }
 
 /* ✅ Consistent Background for Both Light & Dark Mode */
@@ -64,41 +61,55 @@ body::before {
 
 /* ✅ Light Mode */
 .light {
-  color: #1E40AF;
+  color: #1E293B; /* ✅ Darker text for better readability */
   background: transparent !important;
 }
 
+.light h1{
+  color: #1e40af; 
+}
+
+/* ✅ Fix Light Mode Text Colors */
+ .light h2, .light h3, .light h4, .light h5, .light h6 {
+  color: #1E293B; /* ✅ Darker heading color */
+}
+
+.light p, .light li {
+  color: #374151; /* ✅ Improved readability for paragraphs and spans */
+}
+
+.light a {
+  color: #494a4a; /* ✅ Keep links readable */
+}
+
+.light a:hover {
+  color: #1e40af;
+}
+
+/* ✅ Fix Glassmorphism for Light Mode */
 .light .glass-morphism {
   background: rgba(240, 240, 240, 0.6);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(200, 200, 200, 0.5);
 }
 
-/* ✅ Navbar Styling */
-.dark nav {
-  background: rgba(15, 15, 15, 0.1);
+/* ✅ Navbar Styling (Keep Transparency) */
+.dark nav, .light nav {
+  background: transparent !important;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: none;
 }
 
-.light nav {
-  background: rgba(240, 240, 240, 0.05);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.02);
-  box-shadow: none;
-}
-
-/* ✅ Navbar Links */
+/* ✅ Fix Only Navbar Text Colors */
 .dark nav a {
   color: rgba(255, 255, 255, 0.8);
 }
 
 .light nav a {
-  color: rgba(0, 0, 0, 0.7);
+  color: #1E293B; /* ✅ Darker text for better contrast */
 }
 
-/* ✅ Navbar Hover Effects */
 .dark nav a:hover {
   color: white;
 }
@@ -107,17 +118,46 @@ body::before {
   color: black;
 }
 
-/* ✅ Remove Background Image from Navbar */
-.dark nav, .light nav {
-  background-image: none !important;
+/* ✅ Keep Theme Toggle Button Style Unchanged */
+.light button, .dark button {
+  background: transparent !important;
+  color: inherit !important;
 }
 
-/* ✅ Gradient Text */
+/* ✅ Fix Scroll Progress Bar */
+.dark .progress-bar {
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 1));
+}
+
+.light .progress-bar {
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+}
+
+/* ✅ Fix Skill Bar */
+.light .skill-bar-fill {
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+}
+
+/* ✅ Keep Gradient Text Unchanged */
 .gradient-text {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   background-image: linear-gradient(to right, #3b82f6, #8b5cf6);
+}
+
+/* ✅ Fix Footer Text */
+.light footer {
+  color: #1E293B;
+}
+
+/* ✅ Ensure Icons & Socials Look Correct */
+.light .social-icon {
+  color: #2563eb;
+}
+
+.light .social-icon:hover {
+  color: #1e40af;
 }
 
 /* ✅ Custom Scrollbar */
@@ -181,81 +221,41 @@ body::before {
   z-index: 9999 !important;
 }
 
-.dark .progress-bar {
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 1));
-}
-
-.light .progress-bar {
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
-}
-
-/* ✅ Shape Styling */
-.shape {
-  position: absolute;
-  opacity: 0.7;
-  animation: float 6s ease-in-out infinite alternate;
-}
-
-/* ✅ Dark Mode Shapes */
-.dark .circle {
-  background-color: rgba(255, 0, 0, 0.8);
-  border-radius: 50%;
-}
-
-.dark .square {
-  background-color: rgba(0, 255, 255, 0.8);
-}
-
-.dark .triangle {
-  border-left: 30px solid transparent;
-  border-right: 30px solid transparent;
-  border-bottom: 60px solid rgba(255, 255, 0, 0.8);
-}
-
-.dark .diamond {
-  background-color: rgba(0, 255, 0, 0.8);
-  transform: rotate(45deg);
-}
-
-/* ✅ Light Mode Shapes */
-.light .circle {
-  background-color: rgba(255, 100, 100, 0.9);
-  border-radius: 50%;
-}
-
-.light .square {
-  background-color: rgba(100, 100, 255, 0.9);
-}
-
-.light .triangle {
-  border-left: 30px solid transparent;
-  border-right: 30px solid transparent;
-  border-bottom: 60px solid rgba(255, 255, 100, 1);
-}
-
-.light .diamond {
-  background-color: rgba(100, 255, 100, 1);
-  transform: rotate(45deg);
-}
-
-
-
+/* ✅ Fix Animated Rhombus */
 .rhombus {
   position: absolute;
-  background-color: rgba(59, 130, 246, 0.6); /* ✅ Blue tint */
-  transform: rotate(45deg) scale(1.2); /* ✅ Ensures perfect rhombus shape *//* ✅ Slight border for visibility */
+  background-color: rgba(59, 130, 246, 0.6);
+  transform: rotate(45deg) scale(1.2);
 }
 
-.rhombus-container {
-  overflow: hidden; /* ✅ Stops them from disappearing */
-}
-
-/* ✅ Dark Mode Rhombuses */
 .dark .rhombus {
-  background-color: rgba(34, 197, 94, 0.5); /* ✅ Green tint in Dark Mode */
+  background-color: rgba(34, 197, 94, 0.5);
 }
 
-/* ✅ Light Mode Rhombuses */
 .light .rhombus {
-  background-color: rgba(59, 130, 246, 0.5); /* ✅ Blue tint in Light Mode */
+  background-color: rgba(59, 130, 246, 0.5);
+}
+
+/* ✅ Fix Section Titles */
+.light .section-title {
+  color: #1e40af;
+}
+
+.light .section-text {
+  color: #374151;
+}
+
+/* ✅ Fix Footer in Light Mode */
+.light footer {
+  color: #1E293B;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* ✅ Fix Social Icons */
+.light .social-icon {
+  color: #2563eb;
+}
+
+.light .social-icon:hover {
+  color: #1e40af;
 }

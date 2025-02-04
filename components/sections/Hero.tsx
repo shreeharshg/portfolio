@@ -32,7 +32,7 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p
-          className="text-xl md:text-2xl text-gray-300 mb-8"
+          className="text-xl md:text-2xl text-gray-100 mb-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3, duration: 0.8 }}
