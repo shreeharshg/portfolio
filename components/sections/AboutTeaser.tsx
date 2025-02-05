@@ -49,7 +49,7 @@ export default function AboutTeaser() {
           {/* ✅ Resume Buttons with Increased Space */}
           <div className="flex justify-center md:justify-start space-x-6 mt-8">
             <a
-              href="/Resume.pdf"
+              href="/resume_.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition text-lg"

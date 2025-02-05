@@ -40,28 +40,28 @@ export default function AboutPage() {
     <span className="text-sm text-gray-500">10/2022 – Present</span>
   </p>
   <p className="text-lg">
-    Advancing skills in:
+    Advancing skills in: </p>
+
     <ul className="list-disc list-inside mt-2">
       <li>Algorithms and Data structures with, Distributed & Parallel Algorithms - focus on software & algorithm performance.</li>
       <li>Machine Learning, NLP with Transformers, Data mining techniques</li>
       <li>Software Engineering Core Concepts, Tools & Performance Optimization.</li>
       <li>Visual Computing with graphics, modelling, animations and visualizations</li>
     </ul>
-  </p>
-
+ 
   {/* ✅ B.E. Computer Science */}
   <p className="mt-6 text-lg">
     <strong>B.E. in Computer Science & Engineering</strong> - BMS Institute of Technology, Bengaluru <br />
     <span className="text-sm text-gray-500">08/2018 – 07/2022</span>
   </p>
   <p className="text-lg">
-    Built a strong foundation in:
+    Built a strong foundation in:  </p>
     <ul className="list-disc list-inside mt-2">
       <li>Data Structures & Algorithms.</li>
       <li>Software Development & Database Management.</li>
       <li>Operating Systems, Computer Networks & Microcontrollers.</li>
     </ul>
-  </p>
+
 </section>
 
 
@@ -133,14 +133,14 @@ export default function AboutPage() {
 
   <div className="mt-4 space-x-4">
     <a 
-      href="/Resume.pdf" 
+      href="/resume_.pdf" 
       target="_blank" 
       rel="noopener noreferrer" 
       className="inline-block px-6 py-3 bg-blue-500 text-white rounded-lg text-lg font-semibold hover:bg-blue-600 transition">
       📄 View Resume
     </a>
     <a 
-      href="/Resume.pdf" 
+      href="/resume_.pdf" 
       download="Shreeharsh_Resume.pdf" 
       className="inline-block px-6 py-3 border border-blue-500 text-blue-500 rounded-lg text-lg font-semibold hover:bg-blue-500 hover:text-white transition">
       ⬇️ Download Resume
