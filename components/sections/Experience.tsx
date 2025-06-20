@@ -6,7 +6,7 @@ import TimelineItem from "../ui/TimeLineItem";
 const experiences = [
   {
     date: "Currently",
-    title: "Open to Internship & Working Student Roles",
+    title: "Open to Internship & Full Time Roles",
     company: "",
     description:
       "",
